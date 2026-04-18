@@ -1,0 +1,44 @@
+# Challenge 元数据模板
+#
+# 每道 Hackathon 题目在出题时填写此模板。
+# 参赛者的 trace-recorder 从题目描述中读取 challenge_id 和 challenge_domain，
+# 自动写入 raw_messages.jsonl 的 session_start。
+#
+# 为什么需要预定义：
+#   - GRPO 训练需要"同一问题多条轨迹"分组 → 依赖 challenge_id 一致
+#   - V3.2 领域专家蒸馏需要按 domain 聚类 → 依赖 challenge_domain 一致
+#   - ExGRPO 需要按难度筛选（Acc≈50% 优先）→ 难度从 challenge 级成功率事后统计
+
+challenges:
+  - challenge_id: "dai-2019"
+    title: "La2CuO4 带隙计算复现"
+    domain: "condensed_matter"
+    paper_url: "https://doi.org/10.1234/example"
+    verification_type: "numerical"     # numerical / categorical / qualitative
+    tolerance: 0.05                    # 数值容差（5%），用于 outcome_reward 计算
+    expected_result: "1.85 eV"         # 参考值（用于自动评测）
+    tools_required:                    # 预期需要的科学计算工具
+      - "VASP"
+      - "pymatgen"
+    difficulty_estimate: "medium"      # easy / medium / hard（出题人估计，事后用实际成功率修正）
+
+  - challenge_id: "example-qc-001"
+    title: "H2O 分子基态能量"
+    domain: "quantum_chemistry"
+    paper_url: "https://doi.org/10.1234/example2"
+    verification_type: "numerical"
+    tolerance: 0.01
+    expected_result: "-76.42 Hartree"
+    tools_required:
+      - "PySCF"
+    difficulty_estimate: "easy"
+
+# domain 取值建议（可扩展）：
+#   condensed_matter    凝聚态物理
+#   quantum_chemistry   量子化学
+#   fluid_dynamics      流体力学
+#   materials_science   材料科学
+#   astrophysics        天体物理
+#   biophysics          生物物理
+#   high_energy_physics 高能物理
+#   statistical_mechanics 统计力学
